@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pangalan para sa Landbank Account | External ARAL Tutors</title>
+<style>
+  :root{
+    --ink:#1b2a3a; --muted:#5b6b7b; --line:#cfd8e1; --bg:#f3f6f9; --card:#ffffff;
+    --accent:#0b4f8a; --accent-dark:#083a67; --warn-bg:#fff6e0; --warn-line:#e6b94a;
+    --info-bg:#e9f2fb; --info-line:#8bb6df;
+    --ok-bg:#e8f6ec; --ok-line:#58a971; --err:#b3261e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+  .wrap{max-width:560px;margin:0 auto;padding:16px}
+  header{padding:8px 0 4px}
+  h1{font-size:1.3rem;margin:0 0 2px;line-height:1.25}
+  .sub{margin:0;color:var(--muted);font-size:.92rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-top:14px}
+  .note{border-radius:8px;padding:10px 12px;font-size:.92rem;margin-bottom:10px}
+  .note.info{background:var(--info-bg);border:1px solid var(--info-line)}
+  .note.warn{background:var(--warn-bg);border:1px solid var(--warn-line)}
+  .note p{margin:0 0 6px}
+  .note p:last-child{margin-bottom:0}
+  .note ul{margin:4px 0 6px;padding-left:20px}
+  label{display:block;font-weight:600;margin:14px 0 4px}
+  .hint{font-weight:400;color:var(--muted);font-size:.85rem}
+  input[type=text],select{width:100%;padding:11px 12px;font-size:1rem;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+  input.up{text-transform:uppercase}
+  input:focus,select:focus,button:focus-visible{outline:3px solid #9cc4e8;outline-offset:1px;border-color:var(--accent)}
+  input:disabled,input[readonly]{background:#eef1f4}
+  .check{display:flex;gap:10px;align-items:flex-start;margin-top:8px;font-weight:400}
+  .check input{margin-top:4px;width:18px;height:18px;flex:none}
+  .err{color:var(--err);font-size:.85rem;margin:4px 0 0;min-height:1em}
+  .sect{margin:22px 0 0;padding-top:14px;border-top:1px solid var(--line);font-weight:700}
+  .consent{margin-top:18px;font-size:.88rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+  button.primary{width:100%;margin-top:16px;padding:13px;font-size:1.05rem;font-weight:600;color:#fff;background:var(--accent);border:0;border-radius:8px;cursor:pointer}
+  button.primary:hover{background:var(--accent-dark)}
+  button.primary:disabled{background:#8aa3b8;cursor:not-allowed}
+  button.link{background:none;border:0;color:var(--accent);text-decoration:underline;font-size:.95rem;cursor:pointer;padding:0;margin-top:10px}
+  .banner{border-radius:8px;padding:10px 12px;margin-top:14px;font-size:.95rem}
+  .banner.bad{background:#fdecea;border:1px solid #e5a29d;color:#7a1b15}
+  .done{background:var(--ok-bg);border:1px solid var(--ok-line)}
+  .done h2{margin:0 0 6px;font-size:1.15rem}
+  .fullname{font-weight:700;font-size:1.05rem;margin:8px 0 2px;word-break:break-word}
+  .school{margin:0 0 8px;color:var(--muted)}
+  .hidden{display:none}
+  footer{color:var(--muted);font-size:.8rem;text-align:center;margin:18px 0 8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Pangalan ng External ARAL Tutor</h1>
+    <p class="sub">Para sa magbubukas ng Landbank account para sa remuneration</p>
+  </header>
+
+  <div id="formCard" class="card">
+    <div class="note info">
+      <p><strong>Basahin muna bago sumagot.</strong> Hindi kailangang magbukas ng bagong account kung mayroon ka nang isa sa mga ito:</p>
+      <ul>
+        <li>PISO account</li>
+        <li>account na ginamit mo sa COS</li>
+        <li>ibang bank account</li>
+      </ul>
+      <p>Kung gusto mo pa ring magbukas ng Landbank account, maaari kang sumagot sa form na ito.</p>
+    </div>
+    <div class="note warn">
+      <strong>Isulat ang pangalan ayon sa valid ID.</strong> Ito ang gagamitin sa pagbubukas ng account, kaya dapat tama ang baybay.
+    </div>
+
+    <form id="f" novalidate autocomplete="off">
+      <label for="last">Apelyido <span class="hint">(Last name)</span></label>
+      <input type="text" class="up" id="last" maxlength="60" autocomplete="family-name">
+      <div class="err" id="e-last"></div>
+
+      <label for="first">Pangalan <span class="hint">(First name)</span></label>
+      <input type="text" class="up" id="first" maxlength="60" autocomplete="given-name">
+      <div class="err" id="e-first"></div>
+
+      <label for="middle">Gitnang pangalan <span class="hint">(Middle name, isulat nang buo)</span></label>
+      <input type="text" class="up" id="middle" maxlength="60" autocomplete="additional-name">
+      <label class="check"><input type="checkbox" id="noMiddle"> Walang middle name</label>
+      <div class="err" id="e-middle"></div>
+
+      <label for="ext">Name extension</label>
+      <select id="ext">
+        <option value="WALA" selected>Wala</option>
+        <option>JR.</option><option>SR.</option>
+        <option>II</option><option>III</option><option>IV</option><option>V</option>
+      </select>
+
+      <div class="sect">Paaralang naka-assign</div>
+
+      <label for="school">Paaralan <span class="hint">(i-type ang bahagi ng pangalan, tapos pumili sa listahan)</span></label>
+      <input type="text" id="school" list="schoolList" placeholder="Hal. Calagonsao" autocomplete="off">
+      <datalist id="schoolList"></datalist>
+      <div class="err" id="e-school"></div>
+
+      <label for="district">Distrito <span class="hint">(awtomatikong lalabas)</span></label>
+      <input type="text" id="district" readonly tabindex="-1" placeholder="Lalabas pagkapili ng paaralan">
+
+      <div class="consent">
+        <label class="check"><input type="checkbox" id="consent">
+          <span>Pumapayag ako na gamitin ang aking pangalan para sa pagproseso ng aking remuneration, alinsunod sa Data Privacy Act (RA 10173).</span></label>
+        <div class="err" id="e-consent"></div>
+      </div>
+
+      <div id="banner" class="banner bad hidden"></div>
+      <button type="submit" id="btn" class="primary">Isumite</button>
+    </form>
+  </div>
+
+  <div id="doneCard" class="card done hidden">
+    <h2>Natanggap na ang iyong pangalan</h2>
+    <div>Naitala bilang:</div>
+    <div class="fullname" id="doneName"></div>
+    <div class="school" id="doneSchool"></div>
+    <div>Hindi mo na kailangang mag-submit ulit. Maaari mo nang isara ang pahinang ito.</div>
+    <button type="button" class="link" id="another">Magsumite para sa ibang tao</button>
+  </div>
+
+  <footer>SDO Romblon &middot; Curriculum Implementation Division</footer>
+</div>
+
+<script>
+/* ====== PALITAN ITO ng Web app URL mula sa Apps Script (Deploy > New deployment) ====== */
+const SCRIPT_URL = "PASTE_APPS_SCRIPT_WEB_APP_URL_HERE";
+/* =================================================================================== */
+
+/* [Distrito, Paaralan] - may Tugdan ES na sa Alcantara */
+const SCHOOLS = [["Concepcion","Agbatang PS"],
+  ["Concepcion","Bakhawan ES"],
+  ["Concepcion","Calabasahan ES"],
+  ["Concepcion","Concepcion CS"],
+  ["Concepcion","Dalajican ES"],
+  ["Concepcion","Masadya PS"],
+  ["Concepcion","Masudsud ES"],
+  ["Concepcion","Sampong ES"],
+  ["Concepcion","San Vicente ES"],
+  ["Concepcion","Concepcion NHS"],
+  ["Concepcion","Bakhawan NHS"],
+  ["Alcantara","Agbay-Ang IS"],
+  ["Alcantara","Alcantara CES"],
+  ["Alcantara","Bagsik ES"],
+  ["Alcantara","Bonlao ES"],
+  ["Alcantara","Calagonsao ES"],
+  ["Alcantara","Camili ES"],
+  ["Alcantara","Comod-Om ES"],
+  ["Alcantara","Don Manuel L. Solidum MES"],
+  ["Alcantara","Felipe Madali MES"],
+  ["Alcantara","Gui-ob ES"],
+  ["Alcantara","San Isidro ES"],
+  ["Alcantara","San Roque ES"],
+  ["Alcantara","Tugdan ES"],
+  ["Alcantara","Alcantara NHS"],
+  ["Alcantara","Tugdan NHS"],
+  ["Alcantara","Melodias Imperial Sr. NHS"],
+  ["Banton","Balogo ES"],
+  ["Banton","Banice ES"],
+  ["Banton","Banton CES"],
+  ["Banton","Libtong ES"],
+  ["Banton","Nasunogan ES"],
+  ["Banton","Tan-ag ES"],
+  ["Banton","Tumalum-Lagang ES"],
+  ["Banton","Tungonan ES"],
+  ["Banton","Banton NHS"],
+  ["Banton","Tungonan NHS"],
+  ["Cajidiocan-Magdiwang","Agsao ES"],
+  ["Cajidiocan-Magdiwang","Agutay ES"],
+  ["Cajidiocan-Magdiwang","Ambulong ES"],
+  ["Cajidiocan-Magdiwang","Angel Rio ES"],
+  ["Cajidiocan-Magdiwang","Cajidiocan CES"],
+  ["Cajidiocan-Magdiwang","Camanglad ES"],
+  ["Cajidiocan-Magdiwang","Cambajao ES"],
+  ["Cajidiocan-Magdiwang","Cambalo ES"],
+  ["Cajidiocan-Magdiwang","Cambijang ES"],
+  ["Cajidiocan-Magdiwang","Cantagda ES"],
+  ["Cajidiocan-Magdiwang","Damaso Ramilo MES"],
+  ["Cajidiocan-Magdiwang","Danao ES"],
+  ["Cajidiocan-Magdiwang","Dulangan ES"],
+  ["Cajidiocan-Magdiwang","Gutivan ES"],
+  ["Cajidiocan-Magdiwang","Haguimit Cultural Minority School"],
+  ["Cajidiocan-Magdiwang","Ipil ES"],
+  ["Cajidiocan-Magdiwang","Jao-Asan ES"],
+  ["Cajidiocan-Magdiwang","Lumbang West ES"],
+  ["Cajidiocan-Magdiwang","Magdiwang ES"],
+  ["Cajidiocan-Magdiwang","Marigondon ES"],
+  ["Cajidiocan-Magdiwang","Panaguintingan ES"],
+  ["Cajidiocan-Magdiwang","Silum ES"],
+  ["Cajidiocan-Magdiwang","Taguilos ES"],
+  ["Cajidiocan-Magdiwang","Tampayan ES"],
+  ["Cajidiocan-Magdiwang","Tomas & Maria T. Maglaya MS"],
+  ["Cajidiocan-Magdiwang","Cajidiocan NHS"],
+  ["Cajidiocan-Magdiwang","Lumbang East NHS"],
+  ["Cajidiocan-Magdiwang","Cambalo NHS"],
+  ["Cajidiocan-Magdiwang","Danao NHS"],
+  ["Cajidiocan-Magdiwang","Magdiwang NHS"],
+  ["Cajidiocan-Magdiwang","Agutay NHS"],
+  ["Corcuera","Alegria ES"],
+  ["Corcuera","Ambulong ES"],
+  ["Corcuera","Colong-Colong ES"],
+  ["Corcuera","Corcuera CES"],
+  ["Corcuera","Gobon ES"],
+  ["Corcuera","Ilijan ES"],
+  ["Corcuera","Labnig ES"],
+  ["Corcuera","Mabini ES"],
+  ["Corcuera","Mahaba ES"],
+  ["Corcuera","Mangansag ES"],
+  ["Corcuera","San Roque ES"],
+  ["Corcuera","San Vicente ES"],
+  ["Corcuera","Tacasan ES"],
+  ["Corcuera","Corcuera NHS"],
+  ["Corcuera","Mabini NHS"],
+  ["Corcuera","Mauricio F. Fabito NHS"],
+  ["Looc","Balatucan ES"],
+  ["Looc","Buenavista ES"],
+  ["Looc","Crispin Grimares ES"],
+  ["Looc","Gov. Gonzales ES"],
+  ["Looc","Guinhaya-An IS"],
+  ["Looc","Jose M. Solis ES"],
+  ["Looc","Limon Norte ES"],
+  ["Looc","Limon Sur ES"],
+  ["Looc","Looc CES"],
+  ["Looc","Manhac ES"],
+  ["Looc","Pili ES"],
+  ["Looc","Punta ES"],
+  ["Looc","Agojo IS"],
+  ["Looc","Looc NHS"],
+  ["Looc","Limon Norte NHS"],
+  ["Looc","Buenavista NHS"],
+  ["Odiongan North","Aurora ES"],
+  ["Odiongan North","Boliganay ES"],
+  ["Odiongan North","Budiong ES"],
+  ["Odiongan North","Canduyong ES"],
+  ["Odiongan North","Canlumay Cultural CS"],
+  ["Odiongan North","Gabawan ES"],
+  ["Odiongan North","Libertad ES"],
+  ["Odiongan North","Odiongan North CS"],
+  ["Odiongan North","Palati PS"],
+  ["Odiongan North","Panique ES"],
+  ["Odiongan North","Pato-o IS"],
+  ["Odiongan North","Poctoy-Baito ES"],
+  ["Odiongan North","Tuburan ES"],
+  ["Odiongan North","Tumingad ES"],
+  ["Odiongan North","Libertad NHS"],
+  ["Odiongan North","Gabawan NHS"],
+  ["Odiongan South","Agnocnoc ES"],
+  ["Odiongan South","Amatong ES"],
+  ["Odiongan South","Bagulayag ES"],
+  ["Odiongan South","Bangon ES"],
+  ["Odiongan South","Bunsoran ES"],
+  ["Odiongan South","Claro M. Recto ES"],
+  ["Odiongan South","Ferrol CES"],
+  ["Odiongan South","Hinag-oman ES"],
+  ["Odiongan South","Malilico ES"],
+  ["Odiongan South","Mayha ES"],
+  ["Odiongan South","Odiongan South CES"],
+  ["Odiongan South","Paulino F. Fabon Sr. MS"],
+  ["Odiongan South","Progreso Este ES"],
+  ["Odiongan South","Progreso Oeste ES"],
+  ["Odiongan South","Rizal ES"],
+  ["Odiongan South","Tabobo-an ES"],
+  ["Odiongan South","Tubigon ES"],
+  ["Odiongan South","Tulay ES"],
+  ["Odiongan South","Anahao IS"],
+  ["Odiongan South","Ferrol NHS"],
+  ["Odiongan South","Odiongan NHS"],
+  ["Odiongan South","Mayha NHS"],
+  ["Romblon","Agbaluto ES"],
+  ["Romblon","Agnaga ES"],
+  ["Romblon","Agnay ES"],
+  ["Romblon","Agnipa ES"],
+  ["Romblon","Agpanabat ES"],
+  ["Romblon","Agtongo ES"],
+  ["Romblon","Alad Lamao ES"],
+  ["Romblon","Alad Recudo ES"],
+  ["Romblon","Bagacay ES"],
+  ["Romblon","Cajimos ES"],
+  ["Romblon","Calabogo ES"],
+  ["Romblon","Cobrador ES"],
+  ["Romblon","Cogon ES"],
+  ["Romblon","Ginablan ES"],
+  ["Romblon","Guimpingan ES"],
+  ["Romblon","Ilauran ES"],
+  ["Romblon","Lamao ES"],
+  ["Romblon","Li-O ES"],
+  ["Romblon","Logbon ES"],
+  ["Romblon","Lonos ES"],
+  ["Romblon","Lunas ES"],
+  ["Romblon","Maximino Mazo Motin ES"],
+  ["Romblon","Palje PS"],
+  ["Romblon","Romblon East CS"],
+  ["Romblon","Romblon West CS"],
+  ["Romblon","Sablayan ES"],
+  ["Romblon","San Jose ES"],
+  ["Romblon","Sawang ES"],
+  ["Romblon","Timla ES"],
+  ["Romblon","Agnipa NHS"],
+  ["Romblon","Macario Molina NHS"],
+  ["Romblon","Romblon NHS"],
+  ["Romblon","Alad NHS"],
+  ["Romblon","Sablayan NHS"],
+  ["Romblon","Li-O NHS"],
+  ["San Agustin-Santa Maria-Calatrava","Alfredo P. Navarette MS"],
+  ["San Agustin-Santa Maria-Calatrava","Balogo ES"],
+  ["San Agustin-Santa Maria-Calatrava","Bonga ES"],
+  ["San Agustin-Santa Maria-Calatrava","Buli ES"],
+  ["San Agustin-Santa Maria-Calatrava","Cabibihan ES"],
+  ["San Agustin-Santa Maria-Calatrava","Cabolutan ES"],
+  ["San Agustin-Santa Maria-Calatrava","Calatrava ES"],
+  ["San Agustin-Santa Maria-Calatrava","Camantaya ES"],
+  ["San Agustin-Santa Maria-Calatrava","Carmen ES"],
+  ["San Agustin-Santa Maria-Calatrava","Cawayan ES"],
+  ["San Agustin-Santa Maria-Calatrava","Concepcion Norte ES"],
+  ["San Agustin-Santa Maria-Calatrava","Concepcion Sur ES"],
+  ["San Agustin-Santa Maria-Calatrava","Doña Juana ES"],
+  ["San Agustin-Santa Maria-Calatrava","Esteban Minon Madrona ES"],
+  ["San Agustin-Santa Maria-Calatrava","Fetalvero-Mingoa MS"],
+  ["San Agustin-Santa Maria-Calatrava","Hinugusan ES"],
+  ["San Agustin-Santa Maria-Calatrava","Josefina Fetalino Malayo ES"],
+  ["San Agustin-Santa Maria-Calatrava","Linao ES"],
+  ["San Agustin-Santa Maria-Calatrava","Long Beach ES"],
+  ["San Agustin-Santa Maria-Calatrava","Luis M. Abello Sr. PS"],
+  ["San Agustin-Santa Maria-Calatrava","Pagsangahan ES"],
+  ["San Agustin-Santa Maria-Calatrava","Pang-Alaalang Paaralang Severina M. Solidum"],
+  ["San Agustin-Santa Maria-Calatrava","Paroyhog ES"],
+  ["San Agustin-Santa Maria-Calatrava","San Agustin CES"],
+  ["San Agustin-Santa Maria-Calatrava","Sto. Niño ES"],
+  ["San Agustin-Santa Maria-Calatrava","Sugod ES"],
+  ["San Agustin-Santa Maria-Calatrava","Talamban ES"],
+  ["San Agustin-Santa Maria-Calatrava","Esteban Madrona NHS"],
+  ["San Agustin-Santa Maria-Calatrava","Santa Maria NHS"],
+  ["San Agustin-Santa Maria-Calatrava","Sto. Nino NHS"],
+  ["San Agustin-Santa Maria-Calatrava","Cabolutan NHS"],
+  ["San Agustin-Santa Maria-Calatrava","Carmen NHS"],
+  ["San Agustin-Santa Maria-Calatrava","Victorio Sixon Balogo NHS"],
+  ["San Agustin-Santa Maria-Calatrava","Calatrava NHS"],
+  ["San Agustin-Santa Maria-Calatrava","Pascual Catajay Linao NHS"],
+  ["San Agustin-Santa Maria-Calatrava","San Agustin NTS"],
+  ["San Agustin-Santa Maria-Calatrava","Eduardo M. Moreno NHS"],
+  ["San Agustin-Santa Maria-Calatrava","Talisay IS"],
+  ["San Andres","Agpudlos ES"],
+  ["San Andres","Ben G. Talamisan MS"],
+  ["San Andres","Calunacon ES"],
+  ["San Andres","Dona Martina F. Ganan MS"],
+  ["San Andres","Geminiano Galicia Sr. MS"],
+  ["San Andres","Marigondon Sur ES"],
+  ["San Andres","Matutuna ES"],
+  ["San Andres","Nemesio N. Ganan III MS"],
+  ["San Andres","San Andres CES"],
+  ["San Andres","Tan-Agan ES"],
+  ["San Andres","Victoria ES"],
+  ["San Andres","San Andres NHS"],
+  ["San Andres","Linawan IS"],
+  ["San Andres","Marigondon Norte IS"],
+  ["San Andres","Tanagan NHS"],
+  ["San Andres","San Andres Cultural HS"],
+  ["San Fernando","Agtiwa ES"],
+  ["San Fernando","Azagra ES"],
+  ["San Fernando","Campalingo ES"],
+  ["San Fernando","Canjalon ES"],
+  ["San Fernando","España ES"],
+  ["San Fernando","Layag Cultural Minority School"],
+  ["San Fernando","Mabini ES"],
+  ["San Fernando","Mabulo ES"],
+  ["San Fernando","Otod ES"],
+  ["San Fernando","San Fernando ES"],
+  ["San Fernando","Taclobo ES"],
+  ["San Fernando","Teresa Bernas MS"],
+  ["San Fernando","Don Carlos MMMNHS"],
+  ["San Fernando","Espana NHS"],
+  ["San Fernando","Armin Rios-Marin NHS"],
+  ["San Fernando","Azagra NHS"],
+  ["San Jose-Santa Fe","Agmanic ES"],
+  ["San Jose-Santa Fe","Buenavista ES"],
+  ["San Jose-Santa Fe","Busay ES"],
+  ["San Jose-Santa Fe","Canyayo ES"],
+  ["San Jose-Santa Fe","Combot ES"],
+  ["San Jose-Santa Fe","Danao Sur ES"],
+  ["San Jose-Santa Fe","Guinbirayan ES"],
+  ["San Jose-Santa Fe","Guinpoingan ES"],
+  ["San Jose-Santa Fe","Guintigbasan ES"],
+  ["San Jose-Santa Fe","Inihawan ES"],
+  ["San Jose-Santa Fe","Lamberto Antaran MS"],
+  ["San Jose-Santa Fe","Lanas ES"],
+  ["San Jose-Santa Fe","Magsaysay ES"],
+  ["San Jose-Santa Fe","Mat-I ES"],
+  ["San Jose-Santa Fe","Pandan ES"],
+  ["San Jose-Santa Fe","Pinamihagan ES"],
+  ["San Jose-Santa Fe","San Jose CS"],
+  ["San Jose-Santa Fe","Santa Fe CES"],
+  ["San Jose-Santa Fe","Silvino G. Gajarion ES"],
+  ["San Jose-Santa Fe","Tabugon ES"],
+  ["San Jose-Santa Fe","V. A. Gutierrez Montiel MES"],
+  ["San Jose-Santa Fe","Agripino Armedilla NHS"],
+  ["San Jose-Santa Fe","Guinbirayan NHS"],
+  ["San Jose-Santa Fe","Sta. Fe NHS"],
+  ["San Jose-Santa Fe","Trangquilino Cawaling Sr. NHS"],
+  ["San Jose-Santa Fe","San Jose AHS"],
+  ["San Jose-Santa Fe","Pinamihagan NHS"],
+  ["San Jose-Santa Fe","Lindero IS"],
+  ["San Jose-Santa Fe","Santa Fe Senior High School"]];
+
+const $ = id => document.getElementById(id);
+const NAME_OK = /^[A-ZÑ][A-ZÑ.\-' ]*$/;
+
+/* Listahan ng paaralan: "Paaralan (Distrito)" para hindi malito ang magkaparehong pangalan
+   (hal. Balogo ES sa Banton at sa San Agustin-Santa Maria-Calatrava) */
+const labelOf = s => s[1] + " (" + s[0] + ")";
+const BY_LABEL = new Map(SCHOOLS.map(s => [labelOf(s).toLowerCase(), s]));
+$("schoolList").innerHTML = SCHOOLS.map(s => '<option value="' + labelOf(s).replace(/"/g,"&quot;") + '"></option>').join("");
+
+function currentSchool(){
+  return BY_LABEL.get($("school").value.trim().toLowerCase()) || null;
+}
+$("school").addEventListener("input", ()=>{
+  const s = currentSchool();
+  $("district").value = s ? s[0] : "";
+  if (s) setErr("school");
+});
+
+function clean(s){ return s.toUpperCase().replace(/\s+/g," ").trim(); }
+function buildFull(d){
+  let s = d.last + ", " + d.first;
+  if (d.middle) s += " " + d.middle;
+  if (d.ext && d.ext !== "WALA") s += " " + d.ext;
+  return s;
+}
+function setErr(id,msg){ $("e-"+id).textContent = msg || ""; }
+
+$("noMiddle").addEventListener("change", e=>{
+  $("middle").disabled = e.target.checked;
+  if (e.target.checked){ $("middle").value=""; setErr("middle"); }
+});
+
+function validate(){
+  let ok = true;
+  const d = {
+    last: clean($("last").value),
+    first: clean($("first").value),
+    middle: $("noMiddle").checked ? "" : clean($("middle").value),
+    ext: $("ext").value
+  };
+  ["last","first","middle","school","consent"].forEach(k=>setErr(k));
+
+  if (!d.last){ setErr("last","Isulat ang apelyido."); ok=false; }
+  else if (!NAME_OK.test(d.last)){ setErr("last","Letra, tuldok, gitling o kudlit lang ang pwede."); ok=false; }
+
+  if (!d.first){ setErr("first","Isulat ang pangalan."); ok=false; }
+  else if (!NAME_OK.test(d.first)){ setErr("first","Letra, tuldok, gitling o kudlit lang ang pwede."); ok=false; }
+
+  if (!$("noMiddle").checked){
+    if (!d.middle){ setErr("middle","Isulat ang middle name, o lagyan ng tsek ang \"Walang middle name\"."); ok=false; }
+    else if (!NAME_OK.test(d.middle)){ setErr("middle","Letra, tuldok, gitling o kudlit lang ang pwede."); ok=false; }
+  }
+
+  const sc = currentSchool();
+  if (!sc){ setErr("school","Pumili ng paaralan mula sa listahan."); ok=false; }
+  else { d.district = sc[0]; d.school = sc[1]; }
+
+  if (!$("consent").checked){ setErr("consent","Kailangan ang pahintulot para makapagsumite."); ok=false; }
+  return ok ? d : null;
+}
+
+function showBanner(msg){
+  const b=$("banner"); b.textContent=msg; b.classList.remove("hidden");
+}
+
+let sending = false;
+$("f").addEventListener("submit", async e=>{
+  e.preventDefault();
+  if (sending) return;
+  $("banner").classList.add("hidden");
+  const d = validate();
+  if (!d) return;
+
+  const full = buildFull(d);
+  if (!confirm("Tama ba ang mga detalye?\n\nPangalan: " + full + "\nPaaralan: " + d.school + "\nDistrito: " + d.district + "\n\nPindutin ang OK para isumite.")) return;
+
+  sending = true;
+  $("btn").disabled = true; $("btn").textContent = "Isinusumite...";
+  try{
+    const res = await fetch(SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify({last:d.last, first:d.first, middle:d.middle, ext:d.ext, school:d.school, district:d.district})
+    });
+    const out = await res.json();
+    if (out.status === "ok"){
+      $("doneName").textContent = out.fullName || full;
+      $("doneSchool").textContent = d.school + ", " + d.district;
+      $("formCard").classList.add("hidden");
+      $("doneCard").classList.remove("hidden");
+      window.scrollTo(0,0);
+    } else if (out.status === "duplicate"){
+      showBanner("Nakatala na ang pangalang ito. Hindi mo na kailangang mag-submit ulit. Kung may mali sa naitalang detalye, ipaalam sa CID.");
+    } else {
+      showBanner(out.message || "May problema sa pagsumite. Subukan ulit.");
+    }
+  }catch(err){
+    showBanner("Hindi makakonekta. Tingnan ang internet at subukan ulit. Kung nakapag-submit ka na, huwag nang ulitin hanggang makumpirma.");
+  }finally{
+    sending = false;
+    $("btn").disabled = false; $("btn").textContent = "Isumite";
+  }
+});
+
+$("another").addEventListener("click", ()=>{
+  $("f").reset();
+  $("middle").disabled = false;
+  $("district").value = "";
+  $("doneCard").classList.add("hidden");
+  $("formCard").classList.remove("hidden");
+  $("banner").classList.add("hidden");
+});
+</script>
+</body>
+</html>
