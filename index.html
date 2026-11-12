@@ -4,132 +4,333 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pangalan para sa Landbank Account | External ARAL Tutors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#1b2a3a; --muted:#5b6b7b; --line:#cfd8e1; --bg:#f3f6f9; --card:#ffffff;
-    --accent:#0b4f8a; --accent-dark:#083a67; --warn-bg:#fff6e0; --warn-line:#e6b94a;
-    --info-bg:#e9f2fb; --info-line:#8bb6df;
-    --ok-bg:#e8f6ec; --ok-line:#58a971; --err:#b3261e;
+    --sea-950:#08212f; --sea-800:#0c4257; --sea-600:#0e6b80; --sea-500:#13869d; --sea-100:#dff0f4; --sea-50:#eef7f9;
+    --marble:#f3f6f7; --paper:#ffffff; --line:#dce4e8; --ink:#13212c; --muted:#5a6a77;
+    --ok:#1b8a5a; --ok-bg:#e6f5ed; --err:#b3261e; --err-bg:#fdeceb; --amber:#8a5a00; --amber-bg:#fff4dc;
+    --r-lg:22px; --r-md:14px; --r-sm:10px;
+    --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+    --body:"Figtree","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
-  .wrap{max-width:560px;margin:0 auto;padding:16px}
-  header{padding:8px 0 4px}
-  h1{font-size:1.3rem;margin:0 0 2px;line-height:1.25}
-  .sub{margin:0;color:var(--muted);font-size:.92rem}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-top:14px}
-  .note{border-radius:8px;padding:10px 12px;font-size:.92rem;margin-bottom:10px}
-  .note.info{background:var(--info-bg);border:1px solid var(--info-line)}
-  .note.warn{background:var(--warn-bg);border:1px solid var(--warn-line)}
-  .note p{margin:0 0 6px}
-  .note p:last-child{margin-bottom:0}
-  .note ul{margin:4px 0 6px;padding-left:20px}
-  label{display:block;font-weight:600;margin:14px 0 4px}
-  .hint{font-weight:400;color:var(--muted);font-size:.85rem}
-  input[type=text],select{width:100%;padding:11px 12px;font-size:1rem;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
-  input.up{text-transform:uppercase}
-  input:focus,select:focus,button:focus-visible{outline:3px solid #9cc4e8;outline-offset:1px;border-color:var(--accent)}
-  input:disabled,input[readonly]{background:#eef1f4}
-  .check{display:flex;gap:10px;align-items:flex-start;margin-top:8px;font-weight:400}
-  .check input{margin-top:4px;width:18px;height:18px;flex:none}
-  .err{color:var(--err);font-size:.85rem;margin:4px 0 0;min-height:1em}
-  .sect{margin:22px 0 0;padding-top:14px;border-top:1px solid var(--line);font-weight:700}
-  .consent{margin-top:18px;font-size:.88rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
-  button.primary{width:100%;margin-top:16px;padding:13px;font-size:1.05rem;font-weight:600;color:#fff;background:var(--accent);border:0;border-radius:8px;cursor:pointer}
-  button.primary:hover{background:var(--accent-dark)}
-  button.primary:disabled{background:#8aa3b8;cursor:not-allowed}
-  button.link{background:none;border:0;color:var(--accent);text-decoration:underline;font-size:.95rem;cursor:pointer;padding:0;margin-top:10px}
-  .banner{border-radius:8px;padding:10px 12px;margin-top:14px;font-size:.95rem}
-  .banner.bad{background:#fdecea;border:1px solid #e5a29d;color:#7a1b15}
-  .done{background:var(--ok-bg);border:1px solid var(--ok-line)}
-  .done h2{margin:0 0 6px;font-size:1.15rem}
-  .fullname{font-weight:700;font-size:1.05rem;margin:8px 0 2px;word-break:break-word}
-  .school{margin:0 0 8px;color:var(--muted)}
-  .hidden{display:none}
-  footer{color:var(--muted);font-size:.8rem;text-align:center;margin:18px 0 8px}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;font-family:var(--body);color:var(--ink);background:var(--marble);line-height:1.55;font-size:16px}
+
+  /* ===== Banner na may marble veins ===== */
+  .hero{
+    position:relative;overflow:hidden;color:#fff;padding:34px 20px 92px;
+    background:radial-gradient(120% 140% at 85% -20%, #17809a 0%, rgba(23,128,154,0) 55%), linear-gradient(160deg,var(--sea-800) 0%, var(--sea-950) 100%);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;opacity:1;pointer-events:none;background-size:cover;background-position:center;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='320' viewBox='0 0 900 320' fill='none'%3E%3Cpath d='M-20 220 C120 150 200 260 340 190 S560 90 700 150 S860 230 940 120' stroke='white' stroke-opacity='.18' stroke-width='1.6'/%3E%3Cpath d='M-20 262 C140 200 260 300 400 230 S620 150 760 210 S880 280 940 200' stroke='white' stroke-opacity='.11' stroke-width='1'/%3E%3Cpath d='M210 -10 C270 60 220 120 320 150 S440 120 480 40' stroke='white' stroke-opacity='.10' stroke-width='1'/%3E%3Cpath d='M620 -10 C600 50 690 70 700 130' stroke='white' stroke-opacity='.08' stroke-width='1'/%3E%3C/svg%3E");
+  }
+  .hero-in{position:relative;max-width:640px;margin:0 auto}
+  .org{margin:0 0 14px;font-size:.88rem;color:#bfe0e8;font-weight:500}
+  h1{font-family:var(--head);font-weight:700;font-size:clamp(1.65rem,6.2vw,2.25rem);line-height:1.12;margin:0 0 8px;letter-spacing:-.01em}
+  .tag{margin:0;color:#cfe8ee;max-width:34ch}
+
+  /* ===== Card ===== */
+  .wrap{max-width:640px;margin:-64px auto 0;padding:0 14px 28px;position:relative}
+  .card{
+    background:var(--paper);border-radius:var(--r-lg);padding:22px 18px 20px;
+    box-shadow:0 1px 2px rgba(8,33,47,.06),0 12px 32px -8px rgba(8,33,47,.22);
+  }
+  @media(min-width:560px){.card{padding:30px 32px 26px}}
+
+  /* ===== Stepper ===== */
+  .stepper{list-style:none;display:flex;margin:0 0 26px;padding:0}
+  .stepper li{flex:1;position:relative;text-align:center;font-size:.8rem;color:var(--muted);font-weight:500}
+  .stepper li::before{ /* linya papunta sa susunod */
+    content:"";position:absolute;top:15px;left:calc(50% + 18px);right:calc(-50% + 18px);height:2px;background:var(--line);
+  }
+  .stepper li:last-child::before{display:none}
+  .stepper li.done::before{background:var(--sea-500)}
+  .dot{
+    width:32px;height:32px;margin:0 auto 6px;border-radius:50%;display:grid;place-items:center;
+    background:var(--paper);border:2px solid var(--line);font-weight:700;font-size:.85rem;color:var(--muted);position:relative;z-index:1;
+    transition:background .2s,border-color .2s,color .2s;
+  }
+  .stepper li.cur{color:var(--sea-800);font-weight:700}
+  .stepper li.cur .dot{border-color:var(--sea-600);color:var(--sea-600);box-shadow:0 0 0 4px var(--sea-100)}
+  .stepper li.done .dot{background:var(--sea-600);border-color:var(--sea-600);color:#fff}
+  .stepper li.done .dot span{display:none}
+  .stepper li .chk{display:none}
+  .stepper li.done .chk{display:block}
+
+  /* ===== Panels ===== */
+  .panel{display:none}
+  .panel.on{display:block;animation:in .22s ease-out}
+  @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.panel.on{animation:none}.dot{transition:none}}
+  h2{font-family:var(--head);font-size:1.45rem;line-height:1.2;margin:0 0 6px;letter-spacing:-.005em;outline:none}
+  .lead{margin:0 0 18px;color:var(--muted)}
+
+  /* ===== Hakbang 1: gabay ===== */
+  .have{background:var(--sea-50);border:1px solid #cfe6ec;border-radius:var(--r-md);padding:16px}
+  .have h3,.prep h3{margin:0 0 10px;font-size:1rem}
+  .have ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .have li{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #d7e8ed;border-radius:var(--r-sm);padding:10px 12px;font-weight:600}
+  .have li svg{flex:none;color:var(--sea-600)}
+  .have p{margin:12px 0 0;color:#2e4654}
+  .prep{margin-top:16px;display:grid;gap:12px}
+  .prep .it{display:flex;gap:12px;align-items:flex-start}
+  .prep .ic{flex:none;width:38px;height:38px;border-radius:11px;background:var(--amber-bg);color:var(--amber);display:grid;place-items:center}
+  .prep b{display:block;line-height:1.3}
+  .prep span.s{color:var(--muted);font-size:.93rem}
+
+  /* ===== Fields ===== */
+  .field{margin:0 0 16px}
+  .row2{display:grid;gap:0 14px}
+  @media(min-width:560px){.row2{grid-template-columns:1fr 1fr}}
+  label.l{display:block;font-weight:600;margin:0 0 6px;font-size:.96rem}
+  .hint{font-weight:400;color:var(--muted);font-size:.86rem}
+  .in,select.in{
+    width:100%;height:52px;padding:0 14px;font:inherit;font-size:1rem;color:var(--ink);background:#fff;
+    border:1.5px solid var(--line);border-radius:var(--r-md);transition:border-color .15s,box-shadow .15s;appearance:none;-webkit-appearance:none;
+  }
+  select.in{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%235a6a77' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:42px}
+  .in.up{text-transform:uppercase}
+  .in:hover{border-color:#b9c7cf}
+  .in:focus{outline:none;border-color:var(--sea-500);box-shadow:0 0 0 4px var(--sea-100)}
+  .in:disabled,.in[readonly]{background:#f1f5f7;color:#7b8a96}
+  .in.bad{border-color:var(--err)}
+  .err{color:var(--err);font-size:.88rem;margin:6px 0 0;min-height:0}
+  .err:empty{display:none}
+  .tick{display:flex;gap:10px;align-items:center;margin-top:10px;cursor:pointer;font-size:.97rem}
+  .tick input{width:20px;height:20px;accent-color:var(--sea-600);flex:none;margin:0}
+
+  .preview{margin-top:6px;padding:14px 16px;border-radius:var(--r-md);background:var(--sea-50);border:1px dashed #a9cfd9}
+  .preview small{display:block;color:var(--muted);font-size:.84rem;margin-bottom:2px}
+  .preview strong{display:block;font-size:1.08rem;word-break:break-word;color:var(--sea-950);min-height:1.6em}
+  .preview strong.empty{color:#8aa0ab;font-weight:500}
+
+  /* ===== Combobox ng paaralan ===== */
+  .combo{position:relative}
+  .combo .in{padding-left:44px}
+  .combo .mag{position:absolute;left:14px;top:15px;color:#7b8a96;pointer-events:none}
+  .opts{
+    position:absolute;z-index:20;left:0;right:0;top:calc(100% + 6px);margin:0;padding:6px;list-style:none;background:#fff;
+    border:1.5px solid var(--line);border-radius:var(--r-md);box-shadow:0 14px 34px -10px rgba(8,33,47,.3);max-height:280px;overflow:auto;display:none;
+  }
+  .opts.open{display:block}
+  .opts li{padding:10px 12px;border-radius:9px;cursor:pointer;display:flex;flex-direction:column;gap:1px}
+  .opts li .sn{font-weight:600}
+  .opts li .sd{font-size:.84rem;color:var(--muted)}
+  .opts li.act{background:var(--sea-100)}
+  .opts li.note{cursor:default;color:var(--muted);font-size:.88rem}
+  .dist{display:flex;align-items:center;gap:10px;height:52px;padding:0 14px;border-radius:var(--r-md);border:1.5px solid var(--line);background:#f1f5f7;color:#7b8a96}
+  .dist.set{background:var(--ok-bg);border-color:#b6e0c9;color:#114f35;font-weight:600}
+  .dist svg{flex:none}
+
+  /* ===== Kumpirma ===== */
+  .review{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;margin:0 0 16px}
+  .rv{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;padding:14px 16px}
+  .rv + .rv{border-top:1px solid var(--line)}
+  .rv dt{color:var(--muted);font-size:.88rem;margin:0 0 2px}
+  .rv dd{margin:0;font-weight:700;word-break:break-word}
+  .rv button{flex:none;background:none;border:0;color:var(--sea-600);font:inherit;font-weight:600;cursor:pointer;padding:4px 2px;border-radius:6px}
+  .rv button:hover{text-decoration:underline}
+  .caution{display:flex;gap:10px;background:var(--amber-bg);border-radius:var(--r-md);padding:12px 14px;color:#5c3d00;font-size:.93rem;margin:0 0 16px}
+  .caution svg{flex:none;margin-top:2px}
+  .consent{font-size:.92rem;color:#33444f;padding:14px;border:1.5px solid var(--line);border-radius:var(--r-md);cursor:pointer;display:flex;gap:12px;align-items:flex-start}
+  .consent input{width:20px;height:20px;accent-color:var(--sea-600);flex:none;margin:2px 0 0}
+  .banner{margin:14px 0 0;padding:12px 14px;border-radius:var(--r-md);background:var(--err-bg);color:#7a1b15;font-size:.95rem}
+  .hidden{display:none!important}
+
+  /* ===== Tagumpay ===== */
+  .success{text-align:center;padding:10px 0 4px}
+  .success .big{width:68px;height:68px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:grid;place-items:center;margin:0 auto 14px}
+  .success .nm{font-family:var(--head);font-size:1.3rem;font-weight:700;margin:10px 0 2px;word-break:break-word}
+  .success .sc{color:var(--muted);margin:0 0 14px}
+  .success p.fin{background:var(--sea-50);border-radius:var(--r-md);padding:12px 14px;margin:0 0 6px}
+
+  /* ===== Mga button ===== */
+  .nav{display:flex;gap:10px;margin-top:22px}
+  .btn{height:52px;border-radius:var(--r-md);font:inherit;font-weight:700;font-size:1rem;cursor:pointer;border:0;padding:0 22px;transition:background .15s,transform .05s}
+  .btn:active{transform:translateY(1px)}
+  .btn.main{flex:1;background:var(--sea-600);color:#fff}
+  .btn.main:hover{background:var(--sea-800)}
+  .btn.main:disabled{background:#93aab4;cursor:not-allowed}
+  .btn.ghost{background:#fff;color:var(--sea-800);border:1.5px solid var(--line)}
+  .btn.ghost:hover{border-color:#b9c7cf;background:#f7fafb}
+  .btn:focus-visible,.rv button:focus-visible,.tick:focus-within,.consent:focus-within{outline:3px solid #86c5d4;outline-offset:2px}
+  .textbtn{background:none;border:0;color:var(--sea-600);font:inherit;font-weight:600;cursor:pointer;margin-top:12px;text-decoration:underline}
+
+  footer{max-width:640px;margin:0 auto;padding:0 20px 28px;text-align:center;color:var(--muted);font-size:.82rem}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>Pangalan ng External ARAL Tutor</h1>
-    <p class="sub">Para sa magbubukas ng Landbank account para sa remuneration</p>
-  </header>
 
-  <div id="formCard" class="card">
-    <div class="note info">
-      <p><strong>Basahin muna bago sumagot.</strong> Hindi kailangang magbukas ng bagong account kung mayroon ka nang isa sa mga ito:</p>
-      <ul>
-        <li>PISO account</li>
-        <li>account na ginamit mo sa COS</li>
-        <li>ibang bank account</li>
-      </ul>
-      <p>Kung gusto mo pa ring magbukas ng Landbank account, maaari kang sumagot sa form na ito.</p>
-    </div>
-    <div class="note warn">
-      <strong>Isulat ang pangalan ayon sa valid ID.</strong> Ito ang gagamitin sa pagbubukas ng account, kaya dapat tama ang baybay.
-    </div>
+<div class="hero">
+  <div class="hero-in">
+    <p class="org">Schools Division Office of Romblon, Curriculum Implementation Division</p>
+    <h1>Pangalan para sa Landbank account</h1>
+    <p class="tag">Para sa mga External ARAL Tutor na magbubukas ng account para sa remuneration.</p>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="card">
+
+    <ol class="stepper" id="stepper" aria-label="Mga hakbang">
+      <li><div class="dot"><span>1</span><svg class="chk" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>Gabay</li>
+      <li><div class="dot"><span>2</span><svg class="chk" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>Pangalan</li>
+      <li><div class="dot"><span>3</span><svg class="chk" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>Paaralan</li>
+      <li><div class="dot"><span>4</span><svg class="chk" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>Kumpirma</li>
+    </ol>
 
     <form id="f" novalidate autocomplete="off">
-      <label for="last">Apelyido <span class="hint">(Last name)</span></label>
-      <input type="text" class="up" id="last" maxlength="60" autocomplete="family-name">
-      <div class="err" id="e-last"></div>
 
-      <label for="first">Pangalan <span class="hint">(First name)</span></label>
-      <input type="text" class="up" id="first" maxlength="60" autocomplete="given-name">
-      <div class="err" id="e-first"></div>
+      <!-- HAKBANG 1: GABAY -->
+      <section class="panel on" data-step="1">
+        <h2 tabindex="-1">Bago ka sumagot</h2>
+        <p class="lead">Basahin muna ito para malaman kung kailangan mo pang sumagot.</p>
 
-      <label for="middle">Gitnang pangalan <span class="hint">(Middle name, isulat nang buo)</span></label>
-      <input type="text" class="up" id="middle" maxlength="60" autocomplete="additional-name">
-      <label class="check"><input type="checkbox" id="noMiddle"> Walang middle name</label>
-      <div class="err" id="e-middle"></div>
+        <div class="have">
+          <h3>Hindi mo na kailangang magbukas ng bagong account kung mayroon ka nang:</h3>
+          <ul>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>PISO account</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>Account na ginamit mo sa COS</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>Ibang bank account</li>
+          </ul>
+          <p>Kung gusto mo pa ring magbukas ng <strong>Landbank account</strong>, magpatuloy sa form na ito.</p>
+        </div>
 
-      <label for="ext">Name extension</label>
-      <select id="ext">
-        <option value="WALA" selected>Wala</option>
-        <option>JR.</option><option>SR.</option>
-        <option>II</option><option>III</option><option>IV</option><option>V</option>
-      </select>
+        <div class="prep">
+          <h3>Ihanda bago magsimula</h3>
+          <div class="it">
+            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.6-1.6 1.8-2.4 3-2.4s2.4.8 3 2.4M14.5 10h4M14.5 13.5h3"/></svg></div>
+            <div><b>Valid ID</b><span class="s">Isulat ang pangalan ayon dito. Ito ang gagamitin sa pagbubukas ng account, kaya dapat tama ang baybay.</span></div>
+          </div>
+          <div class="it">
+            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6M5 10v9M19 10v9M9 19v-6M15 19v-6M3 19h18"/></svg></div>
+            <div><b>Paaralang naka-assign sa iyo</b><span class="s">Pipiliin mo ito sa listahan, at kusang lalabas ang distrito.</span></div>
+          </div>
+        </div>
+      </section>
 
-      <div class="sect">Paaralang naka-assign</div>
+      <!-- HAKBANG 2: PANGALAN -->
+      <section class="panel" data-step="2">
+        <h2 tabindex="-1">Ang iyong pangalan</h2>
+        <p class="lead">Ayon sa valid ID. Kusa itong magiging malalaking titik.</p>
 
-      <label for="school">Paaralan <span class="hint">(i-type ang bahagi ng pangalan, tapos pumili sa listahan)</span></label>
-      <input type="text" id="school" list="schoolList" placeholder="Hal. Calagonsao" autocomplete="off">
-      <datalist id="schoolList"></datalist>
-      <div class="err" id="e-school"></div>
+        <div class="row2">
+          <div class="field">
+            <label class="l" for="last">Apelyido <span class="hint">(Last name)</span></label>
+            <input class="in up" type="text" id="last" maxlength="60" autocomplete="family-name" enterkeyhint="next">
+            <div class="err" id="e-last" aria-live="polite"></div>
+          </div>
+          <div class="field">
+            <label class="l" for="first">Pangalan <span class="hint">(First name)</span></label>
+            <input class="in up" type="text" id="first" maxlength="60" autocomplete="given-name" enterkeyhint="next">
+            <div class="err" id="e-first" aria-live="polite"></div>
+          </div>
+        </div>
 
-      <label for="district">Distrito <span class="hint">(awtomatikong lalabas)</span></label>
-      <input type="text" id="district" readonly tabindex="-1" placeholder="Lalabas pagkapili ng paaralan">
+        <div class="field">
+          <label class="l" for="middle">Gitnang pangalan <span class="hint">(Middle name, isulat nang buo)</span></label>
+          <input class="in up" type="text" id="middle" maxlength="60" autocomplete="additional-name" enterkeyhint="next">
+          <label class="tick"><input type="checkbox" id="noMiddle"> Walang middle name</label>
+          <div class="err" id="e-middle" aria-live="polite"></div>
+        </div>
 
-      <div class="consent">
-        <label class="check"><input type="checkbox" id="consent">
-          <span>Pumapayag ako na gamitin ang aking pangalan para sa pagproseso ng aking remuneration, alinsunod sa Data Privacy Act (RA 10173).</span></label>
-        <div class="err" id="e-consent"></div>
+        <div class="field">
+          <label class="l" for="ext">Name extension</label>
+          <select class="in" id="ext">
+            <option value="WALA" selected>Wala</option>
+            <option>JR.</option><option>SR.</option>
+            <option>II</option><option>III</option><option>IV</option><option>V</option>
+          </select>
+        </div>
+
+        <div class="preview">
+          <small>Ganito itatala ang pangalan mo</small>
+          <strong id="pv" class="empty">Lalabas dito habang nagta-type ka</strong>
+        </div>
+      </section>
+
+      <!-- HAKBANG 3: PAARALAN AT DISTRITO -->
+      <section class="panel" data-step="3">
+        <h2 tabindex="-1">Paaralan at distrito</h2>
+        <p class="lead">Piliin ang paaralang naka-assign sa iyo bilang tutor.</p>
+
+        <div class="field">
+          <label class="l" for="school">Paaralan <span class="hint">(i-type ang bahagi ng pangalan)</span></label>
+          <div class="combo">
+            <svg class="mag" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input class="in" type="text" id="school" placeholder="Hal. Calagonsao" role="combobox" aria-expanded="false" aria-controls="opts" aria-autocomplete="list" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done">
+            <ul class="opts" id="opts" role="listbox"></ul>
+          </div>
+          <div class="err" id="e-school" aria-live="polite"></div>
+        </div>
+
+        <div class="field">
+          <label class="l">Distrito <span class="hint">(awtomatikong lalabas)</span></label>
+          <div class="dist" id="dist">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <span id="distTxt">Lalabas pagkapili ng paaralan</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- HAKBANG 4: KUMPIRMA -->
+      <section class="panel" data-step="4">
+        <h2 tabindex="-1">Tingnan muna bago isumite</h2>
+        <p class="lead">Siguraduhing tama ang lahat. Kung may mali, pindutin ang Baguhin.</p>
+
+        <dl class="review" style="margin-block:0 16px">
+          <div class="rv"><div><dt>Pangalan</dt><dd id="rvName"></dd></div><button type="button" data-go="2">Baguhin</button></div>
+          <div class="rv"><div><dt>Paaralan</dt><dd id="rvSchool"></dd></div><button type="button" data-go="3">Baguhin</button></div>
+          <div class="rv"><div><dt>Distrito</dt><dd id="rvDist"></dd></div><button type="button" data-go="3">Baguhin</button></div>
+        </dl>
+
+        <div class="caution">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5M12 18.5v.01"/></svg>
+          <span>Ihambing ang pangalan sa iyong valid ID. Isang beses lang ang pagsumite.</span>
+        </div>
+
+        <label class="consent">
+          <input type="checkbox" id="consent">
+          <span>Pumapayag ako na gamitin ang aking pangalan para sa pagproseso ng aking remuneration, alinsunod sa Data Privacy Act (RA 10173).</span>
+        </label>
+        <div class="err" id="e-consent" aria-live="polite"></div>
+
+        <div id="banner" class="banner hidden" role="alert"></div>
+      </section>
+
+      <!-- TAGUMPAY -->
+      <section class="panel" data-step="5">
+        <div class="success">
+          <div class="big"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <h2 tabindex="-1">Natanggap na ang iyong pangalan</h2>
+          <div class="nm" id="okName"></div>
+          <p class="sc" id="okSchool"></p>
+          <p class="fin">Hindi mo na kailangang mag-submit ulit. Maaari mo nang isara ang pahinang ito.</p>
+          <button type="button" class="textbtn" id="another">Magsumite para sa ibang tao</button>
+        </div>
+      </section>
+
+      <div class="nav" id="nav">
+        <button type="button" class="btn ghost" id="back">Bumalik</button>
+        <button type="submit" class="btn main" id="next">Magpatuloy sa form</button>
       </div>
-
-      <div id="banner" class="banner bad hidden"></div>
-      <button type="submit" id="btn" class="primary">Isumite</button>
     </form>
   </div>
+</main>
 
-  <div id="doneCard" class="card done hidden">
-    <h2>Natanggap na ang iyong pangalan</h2>
-    <div>Naitala bilang:</div>
-    <div class="fullname" id="doneName"></div>
-    <div class="school" id="doneSchool"></div>
-    <div>Hindi mo na kailangang mag-submit ulit. Maaari mo nang isara ang pahinang ito.</div>
-    <button type="button" class="link" id="another">Magsumite para sa ibang tao</button>
-  </div>
-
-  <footer>SDO Romblon &middot; Curriculum Implementation Division</footer>
-</div>
+<footer>Kung may tanong, makipag-ugnayan sa CID, SDO Romblon.</footer>
 
 <script>
 /* ====== PALITAN ITO ng Web app URL mula sa Apps Script (Deploy > New deployment) ====== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwsY2tigowaLIvT1CTdq0psyl6KdmIQVCZSxmSIat40miU89gJkYaI6K5Ln-aouWA75/exec";
+const SCRIPT_URL = "PASTE_APPS_SCRIPT_WEB_APP_URL_HERE";
 /* =================================================================================== */
 
-/* [Distrito, Paaralan] - may Tugdan ES na sa Alcantara */
+/* [Distrito, Paaralan] - kasama na ang Tugdan ES sa Alcantara */
 const SCHOOLS = [["Concepcion","Agbatang PS"],
   ["Concepcion","Bakhawan ES"],
   ["Concepcion","Calabasahan ES"],
@@ -405,94 +606,156 @@ const SCHOOLS = [["Concepcion","Agbatang PS"],
 
 const $ = id => document.getElementById(id);
 const NAME_OK = /^[A-ZÑ][A-ZÑ.\-' ]*$/;
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fold = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const clean = s => s.toUpperCase().replace(/\s+/g," ").trim();
+const setErr = (id,msg) => { $("e-"+id).textContent = msg || ""; const el=$(id); if(el) el.classList.toggle("bad", !!msg); };
 
-/* Listahan ng paaralan: "Paaralan (Distrito)" para hindi malito ang magkaparehong pangalan
-   (hal. Balogo ES sa Banton at sa San Agustin-Santa Maria-Calatrava) */
-const labelOf = s => s[1] + " (" + s[0] + ")";
-const BY_LABEL = new Map(SCHOOLS.map(s => [labelOf(s).toLowerCase(), s]));
-$("schoolList").innerHTML = SCHOOLS.map(s => '<option value="' + labelOf(s).replace(/"/g,"&quot;") + '"></option>').join("");
+/* ---------- Hakbang ---------- */
+let step = 1, sending = false, finished = false;
+const NEXT_LABEL = {1:"Magpatuloy sa form", 2:"Susunod", 3:"Susunod", 4:"Isumite"};
 
-function currentSchool(){
-  return BY_LABEL.get($("school").value.trim().toLowerCase()) || null;
+function go(n){
+  step = n;
+  document.querySelectorAll(".panel").forEach(p => p.classList.toggle("on", +p.dataset.step === n));
+  document.querySelectorAll("#stepper li").forEach((li,i) => {
+    const k = i+1;
+    li.classList.toggle("done", k < n || n === 5);
+    li.classList.toggle("cur", k === n);
+  });
+  $("back").classList.toggle("hidden", n === 1 || n === 5);
+  $("nav").classList.toggle("hidden", n === 5);
+  $("next").textContent = NEXT_LABEL[n] || "";
+  if (n === 4) fillReview();
+  window.scrollTo({top:0, behavior:"smooth"});
+  const h = document.querySelector('.panel.on h2'); if (h) setTimeout(()=>h.focus({preventScroll:true}), 30);
 }
-$("school").addEventListener("input", ()=>{
-  const s = currentSchool();
-  $("district").value = s ? s[0] : "";
-  if (s) setErr("school");
-});
+$("back").addEventListener("click", () => go(step-1));
+document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => go(+b.dataset.go)));
 
-function clean(s){ return s.toUpperCase().replace(/\s+/g," ").trim(); }
-function buildFull(d){
+/* ---------- Pangalan ---------- */
+function readName(){
+  return {
+    last: clean($("last").value), first: clean($("first").value),
+    middle: $("noMiddle").checked ? "" : clean($("middle").value), ext: $("ext").value
+  };
+}
+function fullName(d){
   let s = d.last + ", " + d.first;
   if (d.middle) s += " " + d.middle;
   if (d.ext && d.ext !== "WALA") s += " " + d.ext;
   return s;
 }
-function setErr(id,msg){ $("e-"+id).textContent = msg || ""; }
-
-$("noMiddle").addEventListener("change", e=>{
+function updatePreview(){
+  const d = readName(), pv = $("pv");
+  if (!d.last && !d.first && !d.middle){ pv.textContent = "Lalabas dito habang nagta-type ka"; pv.className = "empty"; return; }
+  pv.className = "";
+  let s = (d.last || "…") + ", " + (d.first || "…");
+  if (d.middle) s += " " + d.middle;
+  if (d.ext !== "WALA") s += " " + d.ext;
+  pv.textContent = s;
+}
+["last","first","middle","ext"].forEach(id => $(id).addEventListener("input", updatePreview));
+$("ext").addEventListener("change", updatePreview);
+$("noMiddle").addEventListener("change", e => {
   $("middle").disabled = e.target.checked;
-  if (e.target.checked){ $("middle").value=""; setErr("middle"); }
+  if (e.target.checked){ $("middle").value = ""; setErr("middle"); }
+  updatePreview();
 });
-
-function validate(){
-  let ok = true;
-  const d = {
-    last: clean($("last").value),
-    first: clean($("first").value),
-    middle: $("noMiddle").checked ? "" : clean($("middle").value),
-    ext: $("ext").value
-  };
-  ["last","first","middle","school","consent"].forEach(k=>setErr(k));
-
+function validName(){
+  const d = readName(); let ok = true;
+  ["last","first","middle"].forEach(k => setErr(k));
   if (!d.last){ setErr("last","Isulat ang apelyido."); ok=false; }
   else if (!NAME_OK.test(d.last)){ setErr("last","Letra, tuldok, gitling o kudlit lang ang pwede."); ok=false; }
-
   if (!d.first){ setErr("first","Isulat ang pangalan."); ok=false; }
   else if (!NAME_OK.test(d.first)){ setErr("first","Letra, tuldok, gitling o kudlit lang ang pwede."); ok=false; }
-
   if (!$("noMiddle").checked){
     if (!d.middle){ setErr("middle","Isulat ang middle name, o lagyan ng tsek ang \"Walang middle name\"."); ok=false; }
     else if (!NAME_OK.test(d.middle)){ setErr("middle","Letra, tuldok, gitling o kudlit lang ang pwede."); ok=false; }
   }
-
-  const sc = currentSchool();
-  if (!sc){ setErr("school","Pumili ng paaralan mula sa listahan."); ok=false; }
-  else { d.district = sc[0]; d.school = sc[1]; }
-
-  if (!$("consent").checked){ setErr("consent","Kailangan ang pahintulot para makapagsumite."); ok=false; }
-  return ok ? d : null;
+  return ok;
 }
 
-function showBanner(msg){
-  const b=$("banner"); b.textContent=msg; b.classList.remove("hidden");
+/* ---------- Paaralan (searchable) ---------- */
+const INDEX = SCHOOLS.map(s => ({d:s[0], n:s[1], key: fold(s[1] + " " + s[0])}));
+const sIn = $("school"), opts = $("opts");
+let selected = null, active = -1, shown = [];
+const LIMIT = 50;
+
+function renderOpts(){
+  const terms = fold(sIn.value).split(/\s+/).filter(Boolean);
+  const all = INDEX.filter(o => terms.every(t => o.key.includes(t)));
+  shown = all.slice(0, LIMIT);
+  let html = shown.map((o,i) =>
+    '<li role="option" id="opt'+i+'" data-i="'+i+'"><span class="sn">'+esc(o.n)+'</span><span class="sd">'+esc(o.d)+'</span></li>').join("");
+  if (!shown.length) html = '<li class="note">Walang nakitang paaralan. Subukan ang ibang bahagi ng pangalan.</li>';
+  else if (all.length > LIMIT) html += '<li class="note">Marami pang paaralan. Mag-type pa para paliitin ang listahan.</li>';
+  opts.innerHTML = html;
+  active = shown.length ? 0 : -1; markActive(false);
+}
+function markActive(scroll){
+  [...opts.querySelectorAll("li[role=option]")].forEach((li,i) => li.classList.toggle("act", i === active));
+  if (active >= 0){
+    sIn.setAttribute("aria-activedescendant","opt"+active);
+    if (scroll){ const li = $("opt"+active); if (li) li.scrollIntoView({block:"nearest"}); }
+  }
+}
+function openOpts(){ renderOpts(); opts.classList.add("open"); sIn.setAttribute("aria-expanded","true"); }
+function closeOpts(){ opts.classList.remove("open"); sIn.setAttribute("aria-expanded","false"); }
+function choose(i){
+  const o = shown[i]; if (!o) return;
+  selected = o; sIn.value = o.n;
+  setDistrict(o.d); setErr("school"); closeOpts();
+}
+function setDistrict(d){
+  $("dist").classList.toggle("set", !!d);
+  $("distTxt").textContent = d || "Lalabas pagkapili ng paaralan";
+}
+sIn.addEventListener("focus", () => { if (selected) sIn.select(); openOpts(); });
+sIn.addEventListener("input", () => { selected = null; setDistrict(""); openOpts(); });
+sIn.addEventListener("blur", () => setTimeout(closeOpts, 120));
+sIn.addEventListener("keydown", e => {
+  const isOpen = opts.classList.contains("open");
+  if (e.key === "ArrowDown"){ e.preventDefault(); if(!isOpen) openOpts(); else if (active < shown.length-1){ active++; markActive(true); } }
+  else if (e.key === "ArrowUp"){ e.preventDefault(); if (active > 0){ active--; markActive(true); } }
+  else if (e.key === "Enter" && isOpen && active >= 0 && !selected){ e.preventDefault(); choose(active); }
+  else if (e.key === "Escape"){ closeOpts(); }
+});
+opts.addEventListener("mousedown", e => e.preventDefault());          // huwag mawala ang focus ng input
+opts.addEventListener("click", e => { const li = e.target.closest("li[data-i]"); if (li) choose(+li.dataset.i); });
+
+function validSchool(){
+  if (!selected){ setErr("school","Pumili ng paaralan mula sa listahan."); return false; }
+  setErr("school"); return true;
 }
 
-let sending = false;
-$("f").addEventListener("submit", async e=>{
-  e.preventDefault();
-  if (sending) return;
+/* ---------- Kumpirma at pagsumite ---------- */
+function fillReview(){
+  $("rvName").textContent = fullName(readName());
+  $("rvSchool").textContent = selected ? selected.n : "";
+  $("rvDist").textContent = selected ? selected.d : "";
   $("banner").classList.add("hidden");
-  const d = validate();
-  if (!d) return;
+}
+function showBanner(msg){ const b=$("banner"); b.textContent = msg; b.classList.remove("hidden"); }
 
-  const full = buildFull(d);
-  if (!confirm("Tama ba ang mga detalye?\n\nPangalan: " + full + "\nPaaralan: " + d.school + "\nDistrito: " + d.district + "\n\nPindutin ang OK para isumite.")) return;
-
-  sending = true;
-  $("btn").disabled = true; $("btn").textContent = "Isinusumite...";
+async function submitAll(){
+  if (sending || finished) return;
+  $("banner").classList.add("hidden");
+  if (!$("consent").checked){ setErr("consent","Kailangan ang pahintulot para makapagsumite."); return; }
+  setErr("consent");
+  const d = readName();
+  sending = true; $("next").disabled = true; $("back").disabled = true; $("next").textContent = "Isinusumite...";
   try{
     const res = await fetch(SCRIPT_URL, {
-      method:"POST",
-      body: JSON.stringify({last:d.last, first:d.first, middle:d.middle, ext:d.ext, school:d.school, district:d.district})
+      method: "POST",
+      body: JSON.stringify({last:d.last, first:d.first, middle:d.middle, ext:d.ext, school:selected.n, district:selected.d})
     });
     const out = await res.json();
     if (out.status === "ok"){
-      $("doneName").textContent = out.fullName || full;
-      $("doneSchool").textContent = d.school + ", " + d.district;
-      $("formCard").classList.add("hidden");
-      $("doneCard").classList.remove("hidden");
-      window.scrollTo(0,0);
+      finished = true;
+      $("okName").textContent = out.fullName || fullName(d);
+      $("okSchool").textContent = selected.n + ", " + selected.d;
+      go(5);
     } else if (out.status === "duplicate"){
       showBanner("Nakatala na ang pangalang ito. Hindi mo na kailangang mag-submit ulit. Kung may mali sa naitalang detalye, ipaalam sa CID.");
     } else {
@@ -501,19 +764,26 @@ $("f").addEventListener("submit", async e=>{
   }catch(err){
     showBanner("Hindi makakonekta. Tingnan ang internet at subukan ulit. Kung nakapag-submit ka na, huwag nang ulitin hanggang makumpirma.");
   }finally{
-    sending = false;
-    $("btn").disabled = false; $("btn").textContent = "Isumite";
+    sending = false; $("next").disabled = false; $("back").disabled = false;
+    if (!finished) $("next").textContent = NEXT_LABEL[4];
   }
+}
+
+$("f").addEventListener("submit", e => {
+  e.preventDefault();
+  if (step === 1) go(2);
+  else if (step === 2){ if (validName()) go(3); }
+  else if (step === 3){ if (validSchool()) go(4); }
+  else if (step === 4) submitAll();
 });
 
-$("another").addEventListener("click", ()=>{
-  $("f").reset();
-  $("middle").disabled = false;
-  $("district").value = "";
-  $("doneCard").classList.add("hidden");
-  $("formCard").classList.remove("hidden");
-  $("banner").classList.add("hidden");
+$("another").addEventListener("click", () => {
+  $("f").reset(); $("middle").disabled = false;
+  selected = null; setDistrict(""); updatePreview();
+  finished = false; go(2);
 });
+
+go(1);
 </script>
 </body>
 </html>
